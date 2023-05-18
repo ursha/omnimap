@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="omnimap/images/globe.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OmniMap</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+   
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar bg-body-tertiary"> 
+      <div class="container-fluid d-flex align-items-center">
+        <a href="#" id="homeButton">
+          <img src="./images/home.png" alt="Home Button">
+        </a>
+        <a class="navbar-brand" href="#">OmniMap</a>
+        
+        <form class="d-flex" role="search" id="searchForm">
+          <input class="form-control me-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="Search for location" type="submit">Search</button>
+        </form>
+        
+      </div>
+    </nav>
+    </nav>
+    <div id="map" class="custom-map"></div>
+ 
+     
+          <!-- Basemap selector -->
+          <select id="basemap-select" class="form-select form-select-sm" data-toggle="tooltip" data-placement="top" title="Choose a basemap">
+            <option value="osm">Select Basemap : </option>
+            <option value="osm">Open Street Map</option>
+            <option value="satellite">Satellite</option>
+            <option value="CartoDb">CartoDb</option>
+            <option value="Esri Gray (light)">Esri Gray (light)</option>
+            <option value="Esri Gray (dark)">Esri Gray (dark)</option>
+          </select>
+        </div>
+
+ 
+ 
+  </body>
+
+
+
+   <!-- Include OpenLayers JavaScript -->
+   <script type="module" src="./main.js"></script>
+   <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+ 
+   
+   
+   
+
+   
+</html>
