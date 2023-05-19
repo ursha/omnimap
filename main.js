@@ -4,23 +4,41 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 import XYZ from 'ol/source/XYZ.js';
+import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
+
+
+const scaleControl = new ScaleLine({
+  units: 'metric',
+  bar: true,
+  steps: 4,
+  text: true,
+  minWidth: 140,
+});
 
 
 
 
 const map = new Map({
+controls: defaultControls().extend([scaleControl]),
+ 
+
+  
   target: 'map',
+  
   layers: [
     new TileLayer({
       source: new OSM()
     })
   ],
   view: new View({
-    center: [2666865.3349, 7374397.8447],
-    
+    center: [24.0297, 55.1694],
+    projection: 'EPSG:4326',
+   
     zoom: 7,
   }),
 });
+
+
 
 
 // search for place 
@@ -111,5 +129,8 @@ basemapSelect.addEventListener('change', function (event) {
   map.getLayers().removeAt(0);
   map.getLayers().insertAt(0, newLayerSource);
 });
+
+
+
 
 
