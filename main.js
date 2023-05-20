@@ -6,7 +6,27 @@ import { fromLonLat } from 'ol/proj';
 import XYZ from 'ol/source/XYZ.js';
 import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
 
+import {MousePosition} from 'ol/control';
+import {createStringXY} from 'ol/coordinate';
 
+// mouse position?
+const mousePositionControl = new MousePosition({
+  coordinateFormat: createStringXY(4),
+  projection: 'EPSG:4326',
+  className: 'custom-mouse-position',
+  target: document.getElementById('coordinates'), // Updated target
+  undefinedHTML: '&nbsp;',
+});
+
+
+
+
+
+
+
+
+
+// scalebars
 const scaleControl = new ScaleLine({
   units: 'metric',
   bar: true,
@@ -19,7 +39,7 @@ const scaleControl = new ScaleLine({
 
 
 const map = new Map({
-controls: defaultControls().extend([scaleControl]),
+  controls: defaultControls().extend([scaleControl, mousePositionControl]),
  
 
   
@@ -31,8 +51,8 @@ controls: defaultControls().extend([scaleControl]),
     })
   ],
   view: new View({
-    center: [24.0297, 55.1694],
-    projection: 'EPSG:4326',
+    center: [2650472.1246, 7424538.4154],
+    // projection: 'EPSG:4326',
    
     zoom: 7,
   }),

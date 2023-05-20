@@ -91,3 +91,29 @@ html, body {
   top:1%;
   
 }
+/* mouse poition */
+
+#mouse-position {
+  position: fixed;
+  top: 93%;
+  left: 97%;
+  transform: translate(-50%, -50%);
+}
+
+#coordinate-display {
+  padding: 10px;
+  pointer-events: none;
+  background-color: #030d18;
+  color: #ffffff; /* White text color */
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  margin-bottom: 10px;
+  color: #ffffff; /* White text color */
+}
