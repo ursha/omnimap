@@ -9,14 +9,24 @@ import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
 import {MousePosition} from 'ol/control';
 import {createStringXY} from 'ol/coordinate';
 
+import DragAndDrop from 'ol/interaction/DragAndDrop';
+import GeoJSON from 'ol/format/GeoJSON';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+
+
 // mouse position?
 const mousePositionControl = new MousePosition({
-  coordinateFormat: createStringXY(4),
+  coordinateFormat: createStringXY(6),
   projection: 'EPSG:4326',
   className: 'custom-mouse-position',
   target: document.getElementById('coordinates'), // Updated target
   undefinedHTML: '&nbsp;',
 });
+
+
+
+
 
 
 
@@ -57,6 +67,52 @@ const map = new Map({
     zoom: 7,
   }),
 });
+// drag drop
+const source = new VectorSource();
+const layer = new VectorLayer({
+  source: source,
+});
+map.addLayer(layer);
+
+
+
+map.addInteraction(
+  new DragAndDrop({
+    source: source,
+    formatConstructors: [GeoJSON],
+  })
+);
+// layers 
+function bindInputs(layerid, layer) {
+  const visibilityInput = $(layerid + ' input.visible');
+  visibilityInput.on('change', function () {
+    layer.setVisible(this.checked);
+  });
+  visibilityInput.prop('checked', layer.getVisible());
+
+  const opacityInput = $(layerid + ' input.opacity');
+  opacityInput.on('input', function () {
+    layer.setOpacity(parseFloat(this.value));
+  });
+  opacityInput.val(String(layer.getOpacity()));
+}
+function setup(id, group) {
+  group.getLayers().forEach(function (layer, i) {
+    const layerid = id + i;
+    bindInputs(layerid, layer);
+    if (layer instanceof LayerGroup) {
+      setup(layerid, layer);
+    }
+  });
+}
+setup('#layer', map.getLayerGroup());
+
+$('#layertree li > span')
+  .click(function () {
+    $(this).siblings('fieldset').toggle();
+  })
+  .siblings('fieldset')
+  .hide();
 
 
 

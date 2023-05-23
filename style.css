@@ -117,3 +117,14 @@ html, body {
   margin-bottom: 10px;
   color: #ffffff; /* White text color */
 }
+
+/* layer switcher 
+ */
+ #layer-switcher {
+  top: 70% !important;
+  left: 0% !important;
+  width: 250px !important; 
+  z-index: 1000 !important;
+  background-color: #0e0e0f;
+  color: white; /* This line will make the text color white */
+}
