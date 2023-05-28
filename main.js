@@ -13,6 +13,9 @@ import DragAndDrop from 'ol/interaction/DragAndDrop';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import TileWMS from 'ol/source/TileWMS';
+
+
 
 
 // mouse position?
@@ -23,16 +26,6 @@ const mousePositionControl = new MousePosition({
   target: document.getElementById('coordinates'), // Updated target
   undefinedHTML: '&nbsp;',
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -48,11 +41,11 @@ const scaleControl = new ScaleLine({
 
 
 
+
+
 const map = new Map({
   controls: defaultControls().extend([scaleControl, mousePositionControl]),
  
-
-  
   target: 'map',
   
   layers: [
@@ -67,6 +60,24 @@ const map = new Map({
     zoom: 7,
   }),
 });
+
+// New WMS Layer
+const newWmsLayer = new TileLayer({
+  source: new TileWMS({
+    url: 'http://localhost:8080/geoserver/Lithuania/wms',
+    params: {
+      'LAYERS': 'Lithuania:Lithuania_DEM',
+      'TILED': true,
+    },
+    serverType: 'geoserver',
+    // Add this if your GeoServer supports cross-origin requests
+    
+  }),
+});
+
+map.addLayer(newWmsLayer);
+
+
 // drag drop
 const source = new VectorSource();
 const layer = new VectorLayer({
@@ -82,37 +93,12 @@ map.addInteraction(
     formatConstructors: [GeoJSON],
   })
 );
-// layers 
-function bindInputs(layerid, layer) {
-  const visibilityInput = $(layerid + ' input.visible');
-  visibilityInput.on('change', function () {
-    layer.setVisible(this.checked);
-  });
-  visibilityInput.prop('checked', layer.getVisible());
 
-  const opacityInput = $(layerid + ' input.opacity');
-  opacityInput.on('input', function () {
-    layer.setOpacity(parseFloat(this.value));
-  });
-  opacityInput.val(String(layer.getOpacity()));
-}
-function setup(id, group) {
-  group.getLayers().forEach(function (layer, i) {
-    const layerid = id + i;
-    bindInputs(layerid, layer);
-    if (layer instanceof LayerGroup) {
-      setup(layerid, layer);
-    }
-  });
-}
-setup('#layer', map.getLayerGroup());
 
-$('#layertree li > span')
-  .click(function () {
-    $(this).siblings('fieldset').toggle();
-  })
-  .siblings('fieldset')
-  .hide();
+
+
+
+
 
 
 
@@ -208,5 +194,15 @@ basemapSelect.addEventListener('change', function (event) {
 
 
 
+// Layer controls toggles 
+
+const layer1Checkbox = document.getElementById('layer1');
+layer1Checkbox.addEventListener('change', function() {
+  newWmsLayer.setVisible(this.checked);
+});
+// DEM Opasicty 
+opacitySlider.addEventListener('input', function() {
+  newWmsLayer.setOpacity(parseFloat(this.value));
+});
 
 

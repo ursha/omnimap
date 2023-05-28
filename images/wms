@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE ServiceExceptionReport SYSTEM "http://localhost:8080/geoserver/schemas/wms/1.1.1/WMS_exception_1_1_1.dtd"> <ServiceExceptionReport version="1.1.1" >   <ServiceException>
+      java.lang.reflect.UndeclaredThrowableExceptionUnable to obtain connection: Cannot create PoolableConnectionFactory (Connection to 172.18.02:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.)
+Cannot create PoolableConnectionFactory (Connection to 172.18.02:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.)
+Connection to 172.18.02:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+Connection refused (Connection refused)
+</ServiceException></ServiceExceptionReport>
