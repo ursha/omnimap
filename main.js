@@ -71,10 +71,10 @@ const newWmsLayer = new TileLayer({
     },
     serverType: 'geoserver',
     // Add this if your GeoServer supports cross-origin requests
-    
+     // set visibility to false
   }),
 });
-
+newWmsLayer.setVisible(false);
 map.addLayer(newWmsLayer);
 
 
@@ -204,5 +204,6 @@ layer1Checkbox.addEventListener('change', function() {
 opacitySlider.addEventListener('input', function() {
   newWmsLayer.setOpacity(parseFloat(this.value));
 });
+
 
 
