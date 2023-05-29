@@ -77,6 +77,34 @@ const newWmsLayer = new TileLayer({
 newWmsLayer.setVisible(false);
 map.addLayer(newWmsLayer);
 
+// sentinel2 layer
+const sentinelLayer = new TileLayer({
+  source: new TileWMS({
+      url: 'http://localhost:8080/geoserver/Lithuania/wms',
+      params: {
+          'LAYERS': 'Lithuania:2023-05-14-00_00_2023-05-14-23_59_Sentinel-2_L2A_True_color',
+          'TILED': true,
+      },
+      serverType: 'geoserver',
+  }),
+});
+sentinelLayer.setVisible(false); // set visibility to false
+map.addLayer(sentinelLayer);
+
+// sentinel1
+const sentinelSARLayer = new TileLayer({
+  source: new TileWMS({
+      url: 'http://localhost:8080/geoserver/Lithuania/wms',
+      params: {
+          'LAYERS': 'Lithuania:2023-05-26-00_00_2023-05-26-23_59_Sentinel-1_AWS-IW-VVVH_SAR_urban',
+          'TILED': true,
+      },
+      serverType: 'geoserver',
+  }),
+});
+sentinelSARLayer.setVisible(false); // set visibility to false
+map.addLayer(sentinelSARLayer);
+
 
 // drag drop
 const source = new VectorSource();
@@ -205,5 +233,13 @@ opacitySlider.addEventListener('input', function() {
   newWmsLayer.setOpacity(parseFloat(this.value));
 });
 
+const layer2Checkbox = document.getElementById('layer2');
+layer2Checkbox.addEventListener('change', function() {
+    sentinelLayer.setVisible(this.checked);
+});
 
+const layer3Checkbox = document.getElementById('layer3');
+layer3Checkbox.addEventListener('change', function() {
+    sentinelSARLayer.setVisible(this.checked);
+});
 

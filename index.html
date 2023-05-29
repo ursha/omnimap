@@ -51,6 +51,7 @@
           <div id="coordinate-display" class="alert alert-secondary">
               <span class="label label-primary">EPSG:4326</span>
               <div id="coordinates"></div>
+              
           </div>
       </div>
 
@@ -67,11 +68,18 @@
               <input type="range" id="opacitySlider" min="0" max="1" step="0.1" value="1">
           </li>
             <li class="list-group-item">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="layer2">
-                    <label class="form-check-label" for="layer2">District Boundaries</label>
-                </div>
-            </li>
+              <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="layer2">
+                  <label class="form-check-label" for="layer2">Sentinel-2 (Siauliai) </label>
+              </div>
+          </li>
+            <li class="list-group-item">
+              <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="layer3">
+                  <label class="form-check-label" for="layer3">Sentinel-1 SAR (Siauliai) </label>
+              </div>
+          </li>
+        
             <li class="list-group-item">
               <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="layer3">
@@ -93,6 +101,7 @@
         </ul>
     </div>
     
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
   </body>
 
 
